@@ -1,4 +1,10 @@
+import 'package:app2/subLesson1/ButtonPage.dart';
+import 'package:app2/subLesson1/ListViewPage.dart';
+import 'package:app2/subLesson1/TextFieldPage.dart';
+import 'package:app2/subLesson1/TextPage.dart';
 import 'package:flutter/material.dart';
+
+List itm = [TextPage(), TextFieldPage(), ButtonPage(), ListViewPage()];
 
 class subchapter1 extends StatefulWidget {
   const subchapter1({super.key});
@@ -8,6 +14,15 @@ class subchapter1 extends StatefulWidget {
 }
 
 class _subchapter1State extends State<subchapter1> {
+  void selectPage(int idx) {
+    setState(() {
+      if (idx < itm.length) {
+        MaterialPageRoute route = MaterialPageRoute(builder: (c) => itm[idx]);
+        Navigator.of(context).push(route);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,34 +39,43 @@ class _subchapter1State extends State<subchapter1> {
             crossAxisSpacing: 2,
           ),
           itemBuilder: (c, idx) {
-            return Card(
-              elevation: 15,
-              child: Container(
-                width: 100,
-                height: 180,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 198, 28, 28),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.book,
-                      color: const Color.fromARGB(255, 212, 254, 0),
-                      size: 80,
+            return InkWell(
+              onTap: () {
+                selectPage(idx);
+              },
+              child: Card(
+                elevation: 15,
+                child: Container(
+                  width: 100,
+                  height: 180,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 198, 28, 28),
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 0, 227, 53),
+                      width: 5,
                     ),
-                    SizedBox(height: 10),
-                    Divider(),
-                    Text(
-                      "ບົດທີ 1.${idx + 1}",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.book,
+                        color: const Color.fromARGB(255, 212, 254, 0),
+                        size: 80,
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 10),
+                      Divider(),
+                      Text(
+                        "ບົດທີ 1.${idx + 1}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

@@ -82,6 +82,7 @@ flutter:
     - family: FiraSans
       fonts:
         - asset: fonts/FiraSans-Regular.ttf
+        - asset: fonts/NotoSerifLao-VariableFont_wdth,wght
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
