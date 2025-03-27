@@ -5,6 +5,12 @@ import 'package:app2/subLesson1/TextPage.dart';
 import 'package:flutter/material.dart';
 
 List itm = [TextPage(), TextFieldPage(), ButtonPage(), ListViewPage()];
+List<String> titles = [
+  "TextPage",
+  "TextFieldPage",
+  "ButtonPage",
+  "ListViewPage",
+];
 
 class subchapter1 extends StatefulWidget {
   const subchapter1({super.key});
@@ -23,6 +29,22 @@ class _subchapter1State extends State<subchapter1> {
     });
   }
 
+  IconData getIcon(int idx) {
+    // Return a different icon based on the index
+    switch (idx) {
+      case 0:
+        return Icons.text_fields; // TextField
+      case 1:
+        return Icons.edit; // TextPage
+      case 2:
+        return Icons.touch_app; // ButtonPage
+      case 3:
+        return Icons.view_list; // ListViewPage
+      default:
+        return Icons.book; // Default icon
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +54,11 @@ class _subchapter1State extends State<subchapter1> {
         margin: EdgeInsets.all(5),
 
         child: GridView.builder(
-          itemCount: 15,
+          itemCount: 4,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            mainAxisSpacing: 2,
-            crossAxisSpacing: 2,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
           ),
           itemBuilder: (c, idx) {
             return InkWell(
@@ -60,14 +82,14 @@ class _subchapter1State extends State<subchapter1> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
-                        Icons.book,
+                        getIcon(idx), // Set icon dynamically
                         color: const Color.fromARGB(255, 212, 254, 0),
                         size: 80,
                       ),
                       SizedBox(height: 10),
                       Divider(),
                       Text(
-                        "ບົດທີ 1.${idx + 1}",
+                        titles[idx],
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,

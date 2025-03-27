@@ -15,9 +15,11 @@ class myapp extends StatelessWidget {
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           color: Colors.blue.shade900,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
           titleTextStyle: TextStyle(
-            color: Colors.white,
+            color: const Color.fromARGB(255, 255, 255, 255),
             fontSize: 22,
             fontWeight: FontWeight.bold,
           ),

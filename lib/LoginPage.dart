@@ -100,12 +100,6 @@ class _LoginPageState extends State<LoginPage> {
             horizontal: 16,
           ),
         ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter your $label';
-          }
-          return null;
-        },
       ),
     );
   }
@@ -126,16 +120,14 @@ class _LoginPageState extends State<LoginPage> {
                     _isLoading
                         ? null
                         : () async {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() => _isLoading = true);
-                            await Future.delayed(const Duration(seconds: 2));
-                            setState(() => _isLoading = false);
+                          setState(() => _isLoading = true);
+                          await Future.delayed(const Duration(seconds: 1));
+                          setState(() => _isLoading = false);
 
-                            // ignore: use_build_context_synchronously
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (c) => Drawer_Menu()),
-                            );
-                          }
+                          // ไปที่หน้า Drawer_Menu โดยไม่ตรวจสอบข้อมูล
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (c) => Drawer_Menu()),
+                          );
                         },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:

@@ -64,6 +64,7 @@ flutter:
     - images/logo2.png
     - images/me.jpg
     - images/soutsaka.png
+    - images/Modern.png
 
     
 
@@ -80,9 +81,10 @@ flutter:
   # example:
   fonts:
     - family: FiraSans
+    - family: NotoSerifLao
       fonts:
         - asset: fonts/FiraSans-Regular.ttf
-        - asset: fonts/NotoSerifLao-VariableFont_wdth,wght
+        - asset: fonts/NotoSerifLao-VariableFont_wdth,wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
