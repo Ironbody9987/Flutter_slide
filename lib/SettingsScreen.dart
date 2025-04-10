@@ -13,17 +13,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _databaseController = TextEditingController();
 
-  void _clearInputs() {
+  final FocusNode _ipFocus = FocusNode();
+  final FocusNode _usernameFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+  final FocusNode _databaseFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _ipController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _databaseController.dispose();
+    _ipFocus.dispose();
+    _usernameFocus.dispose();
+    _passwordFocus.dispose();
+    _databaseFocus.dispose();
+    super.dispose();
+  }
+
+  void _submitSettings(BuildContext dialogContext) {
+    if (_ipController.text.isNotEmpty &&
+        _usernameController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _databaseController.text.isNotEmpty) {
+      print(
+        "IP: ${_ipController.text}, Username: ${_usernameController.text}, Password: ${_passwordController.text}, Database: ${_databaseController.text}",
+      );
+      Navigator.of(dialogContext).pop(); // Close Popup
+    }
+  }
+
+  void _clearInputs(BuildContext dialogContext) {
     _ipController.clear();
     _usernameController.clear();
     _passwordController.clear();
     _databaseController.clear();
+
+    // Refocus back to IP field
+    Future.delayed(Duration(milliseconds: 100), () {
+      FocusScope.of(dialogContext).requestFocus(_ipFocus);
+    });
   }
 
   void _showSettingsDialog() {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) {
         return AlertDialog(
           titlePadding: const EdgeInsets.all(10),
           title: Column(
@@ -33,61 +68,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 3), // ลดช่องว่าง
+              const SizedBox(height: 3),
               SizedBox(
-                width: 130, // ปรับให้เส้นพอดีกับข้อความ
-                child: const Divider(
-                  thickness: 1.5,
-                  color: Colors.black,
-                ), // เส้นบางลง
+                width: 130,
+                child: const Divider(thickness: 1.5, color: Colors.black),
               ),
             ],
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildTextField(_ipController, 'IP'),
-              _buildTextField(_usernameController, 'Username'),
-              _buildTextField(
-                _passwordController,
-                'Password',
-                obscureText: true,
-              ),
-              _buildTextField(_databaseController, 'Database'),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      String ip = _ipController.text;
-                      String username = _usernameController.text;
-                      String password = _passwordController.text;
-                      String database = _databaseController.text;
-
-                      print(
-                        "IP: $ip, Username: $username, Password: $password, Database: $database",
-                      );
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('OK'),
-                  ),
-                  const SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      _clearInputs();
-                      Navigator.of(context).pop();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                    child: const Text('Cancel'),
-                  ),
-                ],
-              ),
-            ],
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildTextField(
+                  _ipController,
+                  'IP',
+                  focusNode: _ipFocus,
+                  nextFocus: _usernameFocus,
+                  dialogContext: dialogContext,
+                ),
+                _buildTextField(
+                  _usernameController,
+                  'Username',
+                  focusNode: _usernameFocus,
+                  nextFocus: _passwordFocus,
+                  dialogContext: dialogContext,
+                ),
+                _buildTextField(
+                  _passwordController,
+                  'Password',
+                  focusNode: _passwordFocus,
+                  nextFocus: _databaseFocus,
+                  obscureText: true,
+                  dialogContext: dialogContext,
+                ),
+                _buildTextField(
+                  _databaseController,
+                  'Database',
+                  focusNode: _databaseFocus,
+                  isLast: true,
+                  dialogContext: dialogContext,
+                ),
+              ],
+            ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                _clearInputs(dialogContext);
+              },
+              child: const Text('Cancel', style: TextStyle(color: Colors.red)),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _submitSettings(dialogContext);
+              },
+              child: const Text('OK'),
+            ),
+          ],
         );
       },
     );
@@ -97,11 +134,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     TextEditingController controller,
     String label, {
     bool obscureText = false,
+    FocusNode? focusNode,
+    FocusNode? nextFocus,
+    bool isLast = false,
+    required BuildContext dialogContext,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextField(
         controller: controller,
+        focusNode: focusNode,
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(),
@@ -111,6 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
         obscureText: obscureText,
+        textInputAction: isLast ? TextInputAction.done : TextInputAction.next,
       ),
     );
   }
