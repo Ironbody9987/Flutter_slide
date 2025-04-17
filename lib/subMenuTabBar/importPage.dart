@@ -32,11 +32,11 @@ class _ImportPageState extends State<ImportPage> {
             return GestureDetector(
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('ຄຸນເລືອກ: ${products[index]}')),
+                  SnackBar(content: Text('ເລືອກ: ${products[index]}')),
                 );
               },
               child: Card(
-                color: Colors.green.shade50,
+                color: Colors.blue.shade400,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -44,7 +44,7 @@ class _ImportPageState extends State<ImportPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.shopping_cart,
-                        size: 40, color: Colors.green.shade400),
+                        size: 40, color: Colors.blue.shade900),
                     const SizedBox(height: 10),
                     Text(
                       products[index],

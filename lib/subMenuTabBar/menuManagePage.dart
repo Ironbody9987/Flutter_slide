@@ -1,21 +1,29 @@
+import 'package:app2/subManage/customer_page.dart';
+import 'package:app2/subManage/employee_page.dart';
+import 'package:app2/subManage/exchange_rate_page.dart';
+import 'package:app2/subManage/product_info_page.dart';
+import 'package:app2/subManage/product_type_page.dart';
+import 'package:app2/subManage/supplier_page.dart';
+import 'package:app2/subManage/unit_page.dart';
 import 'package:flutter/material.dart';
 
-class menuManagePage extends StatefulWidget {
-  const menuManagePage({super.key});
+
+class MenuManagePage extends StatefulWidget {
+  const MenuManagePage({super.key});
 
   @override
-  State<menuManagePage> createState() => _menuManagePageState();
+  State<MenuManagePage> createState() => _MenuManagePageState();
 }
 
-class _menuManagePageState extends State<menuManagePage> {
-  // ข้อมูล List ตัวอย่าง
+class _MenuManagePageState extends State<MenuManagePage> {
   final List<String> items = [
-    'ສິນຄ້າ',
+    'ຫົວໜ່ວຍ',
     'ປະເພດສິນຄ້າ',
-    'ຫົວໜ່ວຍສິນຄ້າ',
-    'ຜູ້ຈັດຈໍາໜ່າຍ',
-    'ລູກຄ້າ',
-    'ຜູ້ຂາຍ',
+    'ຂໍ້ມູນສິນຄ້າ',
+    'ຜູ້ສະໜອງ',
+    'ພະນັກງານ',
+    'ອັດຕາເເລກປ່ຽນ',
+    'ລູກຄ້າ'
   ];
 
   @override
@@ -30,17 +38,43 @@ class _menuManagePageState extends State<menuManagePage> {
         itemBuilder: (context, index) {
           return ListTile(
             leading: Icon(Icons.folder, color: Colors.blue.shade400),
-            title: Text(items[index],
-                style: const TextStyle(fontSize: 18)),
+            title: Text(items[index], style: const TextStyle(fontSize: 18)),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('ຄຸນເລືອກ: ${items[index]}')),
-              );
+              switch (index) {
+                case 0:
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const UnitPage()));
+                  break;
+                case 1:
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const ProductTypePage()));
+                  break;
+                case 2:
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const ProductInfoPage()));
+                  break;
+                case 3:
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const SupplierPage()));
+                  break;
+                case 4:
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const EmployeePage()));
+                  break;
+                case 5:
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const ExchangeRatePage()));
+                  break;
+                case 6:
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const CustomerPage()));
+                  break;
+              }
             },
           );
         },
       ),
     );
   }
-} 
+}

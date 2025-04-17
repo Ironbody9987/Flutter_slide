@@ -64,7 +64,7 @@ class _SalePageState extends State<SalePage> {
                   icon: const Icon(Icons.shopping_cart),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('ຄຸນເລືອກ: ${product['name']}')),
+                      SnackBar(content: Text('ເລືອກ: ${product['name']}')),
                     );
                   },
                 ),

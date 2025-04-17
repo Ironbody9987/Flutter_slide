@@ -40,11 +40,11 @@ class _Drawer_MenuState extends State<Drawer_Menu> {
               ),
               Tab(icon: Icon(Icons.shopping_basket, size: 25), text: "ຂາຍ"),
               Tab(
-                icon: Icon(Icons.arrow_back, size: 25),
+                icon: Icon(Icons.production_quantity_limits, size: 25),
                 text: "ສັ່ງຊື້ສິນຄ້າ",
               ),
               Tab(
-                icon: Icon(Icons.arrow_forward, size: 25),
+                icon: Icon(Icons.import_export, size: 25),
                 text: "ນຳເຂົ້າສິນຄ້າ",
               ),
               Tab(icon: Icon(Icons.bar_chart, size: 25), text: "ຄົ້ນຫາ"),
@@ -55,13 +55,12 @@ class _Drawer_MenuState extends State<Drawer_Menu> {
         drawer: const MenuDrawer(),
         body: TabBarView(
           children: [
-            menuManagePage(),
+            MenuManagePage(),
             SalePage(),
             MenuOrderPager(),
             ImportPage(),
             SearchPage(),
-            ReportPage()
-          
+            ReportPage(),
           ],
         ),
       ),
@@ -70,54 +69,71 @@ class _Drawer_MenuState extends State<Drawer_Menu> {
 
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          child: ListTile(
-            leading: Icon(Icons.settings, color: Colors.grey.shade600, size: 35),
-            title: Text('ການຕັ້ງຄ່າ',
-                style: TextStyle(color: Colors.blue.shade600, fontSize: 20)),
-            onTap: () {
-              Navigator.of(context).pop();
-              Future.delayed(Duration.zero, () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SettingsScreen()),
-                );
-              });
-            },
-          ),
-        ),
-        const PopupMenuDivider(height: 20),
-        PopupMenuItem(
-          child: ListTile(
-            leading: Icon(Icons.wifi_outlined,
-                color: Colors.grey.shade600, size: 35),
-            title: Text('ເຊື່ອມຕໍ່ Wifi',
-                style: TextStyle(color: Colors.blue.shade600, fontSize: 20)),
-            onTap: () {
-              Navigator.of(context).pop();
-              // Future.delayed(Duration.zero, () {
-              //   Navigator.push(context, MaterialPageRoute(builder: (context) => YourWifiPage()));
-              // });
-            },
-          ),
-        ),
-        const PopupMenuDivider(height: 20),
-        PopupMenuItem(
-          child: ListTile(
-            leading: Icon(Icons.folder,
-                color: Colors.yellow.shade600, size: 35),
-            title: Text('ເຊື່ອມຕໍ່ຖານຂໍ້ມູນ',
-                style: TextStyle(color: Colors.blue.shade600, fontSize: 20)),
-            onTap: () {
-              Navigator.of(context).pop();
-              // Future.delayed(Duration.zero, () {
-              //   Navigator.push(context, MaterialPageRoute(builder: (context) => YourDatabasePage()));
-              // });
-            },
-          ),
-        ),
-      ],
+      itemBuilder:
+          (context) => [
+            PopupMenuItem(
+              child: ListTile(
+                leading: Icon(
+                  Icons.settings,
+                  color: Colors.grey.shade600,
+                  size: 35,
+                ),
+                title: Text(
+                  'ການຕັ້ງຄ່າ',
+                  style: TextStyle(color: Colors.blue.shade600, fontSize: 20),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Future.delayed(Duration.zero, () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SettingsScreen()),
+                    );
+                  });
+                },
+              ),
+            ),
+            const PopupMenuDivider(height: 20),
+            PopupMenuItem(
+              child: ListTile(
+                leading: Icon(
+                  Icons.wifi_outlined,
+                  color: Colors.grey.shade600,
+                  size: 35,
+                ),
+                title: Text(
+                  'ເຊື່ອມຕໍ່ Wifi',
+                  style: TextStyle(color: Colors.blue.shade600, fontSize: 20),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  // Future.delayed(Duration.zero, () {
+                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => YourWifiPage()));
+                  // });
+                },
+              ),
+            ),
+            const PopupMenuDivider(height: 20),
+            PopupMenuItem(
+              child: ListTile(
+                leading: Icon(
+                  Icons.folder,
+                  color: Colors.yellow.shade600,
+                  size: 35,
+                ),
+                title: Text(
+                  'ເຊື່ອມຕໍ່ຖານຂໍ້ມູນ',
+                  style: TextStyle(color: Colors.blue.shade600, fontSize: 20),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  // Future.delayed(Duration.zero, () {
+                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => YourDatabasePage()));
+                  // });
+                },
+              ),
+            ),
+          ],
     );
   }
 }

@@ -4,7 +4,11 @@ class BottomBar extends StatefulWidget {
   final Function(int) onTabTapped;
   final int selectedIndex;
 
-  const BottomBar({super.key, required this.onTabTapped, required this.selectedIndex});
+  const BottomBar({
+    super.key,
+    required this.onTabTapped,
+    required this.selectedIndex,
+  });
 
   @override
   State<BottomBar> createState() => _BottomBarState();

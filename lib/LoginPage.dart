@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
     return Text(
       'BSCP6B Mart',
       style: TextStyle(
-        fontSize:25,
+        fontSize: 25,
         fontFamily: "FiraSans",
         fontWeight: FontWeight.bold,
         color: Colors.amber.shade900,
@@ -72,7 +72,10 @@ class _LoginPageState extends State<LoginPage> {
         decoration: InputDecoration(
           prefixIcon: Icon(
             icon,
-            color: focusNode.hasFocus ? const Color.fromARGB(255, 243, 145, 33) : Colors.grey,
+            color:
+                focusNode.hasFocus
+                    ? const Color.fromARGB(255, 243, 145, 33)
+                    : Colors.grey,
           ),
           suffixIcon:
               isPassword

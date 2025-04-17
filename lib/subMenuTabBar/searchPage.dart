@@ -10,12 +10,12 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   // รายการสินค้า
   List<String> products = [
-    'ສິນຄ້າ 1',
-    'ສິນຄ້າ 2',
-    'ສິນຄ້າ 3',
-    'ສິນຄ້າ 4',
-    'ສິນຄ້າ 5',
-    'ສິນຄ້າ 6',
+    'ບິກ',
+    'ສໍ',
+    'ບັນທັດ',
+    'ເຈ້ຍ',
+    'ສໍສີ',
+    'ປຶ້ມ',
   ];
 
   // ค่าที่กรอกใน TextField
@@ -65,7 +65,7 @@ class _SearchPageState extends State<SearchPage> {
                       // ทำการเลือกสินค้าหรือกระทำการอื่น ๆ ตามต้องการ
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('ຄຸນເລືອກ: ${filteredProducts[index]}'),
+                          content: Text('ເລືອກ: ${filteredProducts[index]}'),
                         ),
                       );
                     },
